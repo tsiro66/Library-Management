@@ -1,6 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="userprofile.aspx.cs" Inherits="LibraryManagement.userprofile" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container-fluid">
@@ -23,7 +29,7 @@
                                 <center>
                                     <h3>Your Profile</h3>
                                     <span>Account Status -</span>
-                                    <asp:Label ID="Label1" runat="server" Text="Your status" class="badge rounded-pill text-bg-success"></asp:Label>
+                                    <asp:Label ID="Label1" runat="server" Text="Your status" class="badge rounded-pill"></asp:Label>
                                 </center>
                             </div>
                         </div>
@@ -64,7 +70,7 @@
                             <div class="col-md-4">
                                 <label>Country</label>
                                 <div class="form-group m-2">
-                                    <asp:DropDownList class="form-control" ID="DropDownList1" runat="server">
+                                    <asp:DropDownList class="form-select" ID="DropDownList1" runat="server">
                                         <asp:ListItem Text="Select" Value="Select" />
                                         <asp:ListItem Text="Greece" Value="Greece" />
                                         <asp:ListItem Text="Turkey" Value="Turkey" />
@@ -87,7 +93,7 @@
                             <div class="col">
                                 <label>Full Adress</label>
                                 <div class="form-group m-2">
-                                    <asp:TextBox class="form-control" ID="TextBox1" runat="server" placeholder="Full Adress" TextMode="Number"></asp:TextBox>
+                                    <asp:TextBox class="form-control" ID="TextBox1" runat="server" placeholder="Full Adress"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -114,7 +120,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group m-2">
-                                    <asp:Button ID="Button1" runat="server" Text="Update" class="btn btn-primary btn-lg w-100 mb-2" />
+                                    <asp:Button ID="Button1" runat="server" Text="Update" class="btn btn-primary btn-lg w-100 mb-2" OnClick="Button1_Click" />
                                 </div>
                             </div>
                         </div>
@@ -136,9 +142,9 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                     <h3>Your books</h3>
+                                    <h3>Your books</h3>
                                     <asp:Label ID="Label2" runat="server" Text="Books info" class="badge rounded-pill text-bg-success"></asp:Label>
-                                </center> 
+                                </center>
                             </div>
                         </div>
                         <div class="row">
@@ -147,8 +153,18 @@
                             </div>
                         </div>
                         <div class="row">
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:libraryDBConnectionString %>" SelectCommand="SELECT * FROM [book_issue_tbl]"></asp:SqlDataSource>
                             <div class="col">
-                                <asp:GridView class="table table-bordered" runat="server"></asp:GridView>
+                                <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="False" OnRowDataBound="GridView1_RowDataBound">
+                                    <Columns>
+                                        <asp:BoundField DataField="member_id" HeaderText="member_id" SortExpression="member_id" />
+                                        <asp:BoundField DataField="member_name" HeaderText="member_name" SortExpression="member_name" />
+                                        <asp:BoundField DataField="book_id" HeaderText="book_id" SortExpression="book_id" />
+                                        <asp:BoundField DataField="book_name" HeaderText="book_name" SortExpression="book_name" />
+                                        <asp:BoundField DataField="issue_date" HeaderText="issue_date" SortExpression="issue_date" />
+                                        <asp:BoundField DataField="due_date" HeaderText="due_date" SortExpression="due_date" />
+                                    </Columns>
+                                </asp:GridView>
                             </div>
                         </div>
                     </div>

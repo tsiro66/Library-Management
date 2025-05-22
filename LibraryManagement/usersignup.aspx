@@ -52,9 +52,9 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label>Email ID</label>
+                                <label>Email</label>
                                 <div class="form-group m-2">
-                                    <asp:TextBox CssClass="form-control" ID="TextBox6" runat="server" placeholder="Email ID" TextMode="email"></asp:TextBox>
+                                    <asp:TextBox CssClass="form-control" ID="TextBox6" runat="server" placeholder="Email" TextMode="email"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                             <div class="col">
                                 <label>Full Adress</label>
                                 <div class="form-group m-2">
-                                    <asp:TextBox class="form-control" ID="TextBox1" runat="server" placeholder="Full Adress" TextMode="Number"></asp:TextBox>
+                                    <asp:TextBox class="form-control" ID="TextBox1" runat="server" placeholder="Full Adress"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group m-2">
-                                    <asp:Button ID="Button1" runat="server" Text="Signup" class="btn btn-success btn-lg w-100 mb-2" />
+                                    <asp:Button ID="Button1" runat="server" Text="Signup" class="btn btn-success btn-lg w-100 mb-2" OnClick="Button1_Click" />
                                 </div>
                                 <div class="row">
                                     <div class="form-group m-2 col">

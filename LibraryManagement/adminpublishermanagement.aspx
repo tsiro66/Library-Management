@@ -1,6 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="adminpublishermanagement.aspx.cs" Inherits="LibraryManagement.adminpublishermanagement" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+ <script type="text/javascript">
+     $(document).ready(function () {
+         $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
+     });
+ </script> 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
@@ -40,7 +46,12 @@
                                 <div class="form-group m-2">
                                     <div class="input-group">
                                         <asp:TextBox CssClass="form-control" ID="TextBox3" runat="server" placeholder="ID"></asp:TextBox>
-                                        <asp:Button class="btn btn-primary" ID="Button1" runat="server" Text="Find" />
+                                        <button runat="server" id="btnSearch" onserverclick="btnSearch_Click" class="btn btn-primary">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                            </svg>
+                                        </button>
+
                                     </div>
                                 </div>
                             </div>
@@ -53,13 +64,13 @@
                         </div>
                         <div class="row mt-2">
                             <div class="col-4">
-                                <asp:Button class="btn btn-lg w-100 btn-success" ID="Button2" runat="server" Text="Add" />
+                                <asp:Button class="btn btn-lg w-100 btn-success" ID="Button2" runat="server" Text="Add" OnClick="Button2_Click"/>
                             </div>
                             <div class="col-4">
-                                <asp:Button class="btn btn-lg w-100 btn-primary" ID="Button3" runat="server" Text="Update" />
+                                <asp:Button class="btn btn-lg w-100 btn-primary" ID="Button3" runat="server" Text="Update" OnClick="Button3_Click"/>
                             </div>
                             <div class="col-4">
-                                <asp:Button class="btn btn-lg w-100 btn-danger" ID="Button4" runat="server" Text="Delete" />
+                                <asp:Button class="btn btn-lg w-100 btn-danger" ID="Button4" runat="server" Text="Delete" OnClick="Button4_Click"/>
                             </div>
                         </div>
 
@@ -95,8 +106,9 @@
                             </div>
                         </div>
                         <div class="row">
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:libraryDBConnectionString %>" SelectCommand="SELECT * FROM [publisher_master_tbl]"></asp:SqlDataSource>
                             <div class="col">
-                                <asp:GridView class="table table-bordered" runat="server"></asp:GridView>
+                                <asp:GridView ID="GridView1" class="table table-bordered" runat="server" DataSourceID="SqlDataSource1"></asp:GridView>
                             </div>
                         </div>
                     </div>
